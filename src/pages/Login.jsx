@@ -49,6 +49,9 @@ class login extends Component {
     const { isButtonDisabled, loading, inputValue } = this.state;
     return (
       <div data-testid="page-login">
+        <span>
+          { loading && <Carregando /> }
+        </span>
         <form>
           <label htmlFor="name">
             Nome:
@@ -68,10 +71,8 @@ class login extends Component {
           >
             Entrar
           </button>
-          {loading ? <Carregando /> && (<Redirect to="/search" />) : !loading}
-          {loading && <Carregando /> }
-          {(!loading && isButtonDisabled) && (<Redirect to="/search" />)}
         </form>
+        {loading ? <Carregando /> && (<Redirect to="/search" />) : !loading}
       </div>
     );
   }
