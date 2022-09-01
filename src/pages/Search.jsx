@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
 import Header from '../components/Header';
 import Carregando from './Carregando';
 import searchAlbumsAPI from '../services/searchAlbumsAPI';
-import { Link } from 'react-router-dom';
 
 class Search extends Component {
   constructor() {
@@ -10,7 +10,6 @@ class Search extends Component {
     this.state = {
       isButtonDisabled: true,
       artista: '',
-      artistaValido: true,
       lista: [],
       guardaArtista: '',
       loading: false,
