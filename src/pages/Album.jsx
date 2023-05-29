@@ -33,6 +33,7 @@ class Album extends Component {
 
   render() {
     const { guardaMusica, guardaNome } = this.state;
+    console.log(guardaNome);
     return (
       <div data-testid="page-album">
         <Header />

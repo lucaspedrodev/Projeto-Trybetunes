@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Redirect } from 'react-router-dom';
 import { createUser } from '../services/userAPI';
 import Carregando from './Carregando';
+import './login.css';
 
 class login extends Component {
   constructor() {
@@ -47,32 +48,35 @@ class login extends Component {
 
   render() {
     const { isButtonDisabled, loading, inputValue } = this.state;
+
+    const formlogin = (
+      <form>
+        <label htmlFor="name">
+          Nome:
+          <input
+            className="inputForm"
+            value={ inputValue }
+            name="inputValue"
+            type="text"
+            data-testid="login-name-input"
+            onChange={ this.handleChange }
+          />
+        </label>
+        <button
+          className="btnForm"
+          type="button"
+          data-testid="login-submit-button"
+          disabled={ isButtonDisabled }
+          onClick={ this.handleclick }
+        >
+          Entrar
+        </button>
+      </form>);
+
     return (
-      <div data-testid="page-login">
-        <p>
-          { loading && <Carregando /> }
-        </p>
-        <form>
-          <label htmlFor="name">
-            Nome:
-            <input
-              value={ inputValue }
-              name="inputValue"
-              type="text"
-              data-testid="login-name-input"
-              onChange={ this.handleChange }
-            />
-          </label>
-          <button
-            type="button"
-            data-testid="login-submit-button"
-            disabled={ isButtonDisabled }
-            onClick={ this.handleclick }
-          >
-            Entrar
-          </button>
-        </form>
-        {loading ? <Carregando /> && (<Redirect to="/search" />) : !loading}
+      <div className="login" data-testid="page-login">
+        { loading ? <Redirect to="/search" /> : null }
+        { loading ? <Carregando /> : formlogin }
       </div>
     );
   }

@@ -9,13 +9,15 @@ class Header extends Component {
     this.state = {
       nameValue: '',
       loading: true,
+
     };
   }
 
-  componentDidMount() {
+  async componentDidMount() {
     this.pegaUsuario();
+    const data = await getUser();
     this.setState({
-      nameValue: localStorage.getItem('user'),
+      nameValue: data.name,
     });
   }
 
@@ -29,17 +31,21 @@ class Header extends Component {
   render() {
     const { nameValue, loading } = this.state;
     return (
+      <div>
+        {loading ? <Carregando /> : (
+          <header data-testid="header-component">
+            <Link to="/search" data-testid="link-to-search"> Procurar </Link>
+            <Link to="/favorites" data-testid="link-to-favorites"> Favoritos </Link>
+            <Link to="/profile" data-testid="link-to-profile"> Perfil </Link>
+            <p>olá</p>
+            <p data-testid="header-user-name">
+              { nameValue }
+            </p>
+            {loading && <Carregando />}
+          </header>
+        )}
 
-      <header data-testid="header-component">
-        <Link to="/search" data-testid="link-to-search"> Procurar </Link>
-        <Link to="/favorites" data-testid="link-to-favorites"> Favoritos </Link>
-        <Link to="/profile" data-testid="link-to-profile"> Perfil </Link>
-        <p>olá</p>
-        <p data-testid="header-user-name">
-          { nameValue }
-        </p>
-        {loading && <Carregando />}
-      </header>
+      </div>
     );
   }
 }
